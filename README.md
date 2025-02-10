@@ -1,28 +1,30 @@
 # Assignment_Accionlab
-#Intersection of Sorted Arrays
+# 7 Intersection of Sorted Arrays
 
 #Python
+class CommonElementsFinder:
+    """Finds common unique elements between two sorted arrays."""
 
-def intersecton_sorted_arrays(arr1, arr2):
-    """ Finds the intersecton of two sorted arrays wthout duplcates"""
-    i, j = 0, 0
-    result = []
+    def __init__(self, arr1, arr2):
+        self.arr1 = set(arr1)  # Convert lists to sets to remove duplicates
+        self.arr2 = set(arr2)
 
-    while i < len(arr1) and j < len(arr2):
-      if arr1[i] == arr2[j]: #if both elements match
-         if not results or results[-1] != arr1[i]: # Avoid duplicates
-           results.append(arr1[i])
+    def find_common(self):
+        return list(self.arr1 & self.arr2)  # Set intersection to find common elements
 
-        i += 1
-        j += 1
-    elif arr1[i] < arr2[j]:
-      i += 1
-    else:
-      j += 1
+# Take user input and process it
+try:
+    arr1 = list(map(int, input("Enter first sorted array (comma-separated): ").split(',')))
+    arr2 = list(map(int, input("Enter second sorted array (comma-separated): ").split(',')))
 
-  return result
+    result = CommonElementsFinder(arr1, arr2).find_common()
+    print(f"Common Elements: {result}")
+
+except ValueError:
+    print("Error: Please enter only numbers separated by commas.")
+
 
 #test cases
 print(intersecton_sorted_arrays([1, 2, 2, 3, 4], [2, 2, 4, 6])) #output : [2, 4]
-print(intersecton_sorted_arrays([1, 3, 5], [2, 4, 6])) #output []
+
 
