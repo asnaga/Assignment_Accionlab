@@ -1,5 +1,5 @@
 # Assignment_Accionlab
-#Kubernetes StatefulSet
+#2 Kubernetes StatefulSet
 
 (Best practice is to keep State yaml and PV yaml seperate namespace for better mangmnt.)
 
