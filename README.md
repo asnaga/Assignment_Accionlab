@@ -1,34 +1,44 @@
 # Assignment_Accionlab
-#Decimal Digit Transformation
+# 8 Decimal Digit Transformation
 
-def compute_series(x):
-#Input Valdidation
+class PatternCalculator:
+    """
+    A class to compute the sum of the series: X + XX + XXX + XXXX for a given single digit X.
+    """
 
-if isinstance(x, int):
-  x = str(x) #convert intger to string for processing
-elif not isinstance(x, str):
-  return "Error: Input must be a digit (0-9)."
+    def __init__(self, x):
+        """
+        Initializes the object with a single digit X after validation.
+        """
+        self.x = self.validate_input(x)
 
-#Chec if Input is single digit
-if not x.isdigit() or len (x) != 1:
-  return " Error: Input must be a single digit between 0 and 9."
+    def validate_input(self, x):
+        """
+        Validates the input to ensure it is a single digit between 0 and 9.
+        """
+        if isinstance(x, int):
+            x = str(x)  # Convert integer to string format
+        elif not isinstance(x, str):
+            raise ValueError("Error: Input must be a digit (0-9).")
 
-#Convert input to integer
-num = int(x)
+        if not x.isdigit() or len(x) != 1:
+            raise ValueError("Error: Input must be a single digit between 0 and 9.")
 
-# Compute the series: X + XX + XXX + XXXX
-result = num + int(x * 2) + int(x * 3) + int(x * 4)
+        return int(x)  # Convert back to integer for calculations
 
-return result
+    def compute_series(self):
+        """
+        Computes the sum of X + XX + XXX + XXXX.
+        """
+        return self.x + int(str(self.x) * 2) + int(str(self.x) * 3) + int(str(self.x) * 4)
 
-user_input = input ("Enter a single digit: ")
 
+# Taking user input 
 try:
-    print(f"Result: {compute_series(user_input)}")
-
+    user_input = input("Enter a single digit (0-9): ")
+    calculator = PatternCalculator(user_input)
+    result = calculator.compute_series()
+    print(f"Result: {result}")
 except ValueError as e:
     print(e)
 
-#Use Cases:
-
-print(compute_series(3))  #Output: 3702
