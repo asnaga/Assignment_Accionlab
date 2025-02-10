@@ -1,31 +1,26 @@
 # Assignment_Accionlab
+# 5 Text Manipulation with an Object Orientated Programming Language
 #will use 404 error log parser using Python
-#Code
-import collections
 
-class LogParser:
-    """Class to parse server logs and extract 404 error IPs."""
+import re
+from collections import Counter
 
-    def _init_(self, file_path):
-        self.file_path = file_path
-        self.ip_list = []
+class LogAnalyzer:
+    def __init__(self, log_file):
+        self.log_file = log_file
 
-    def read_logs(self):
-        """Reads the log file and extracts IPs causing 404 errors."""
+    def extract_404_ips(self):
+        ip_addresses = []
         try:
-          with open (self.file_path, 'r') as files:
-            for lines in file:
-                parts = line.split()
-                if len(parts) > 1 and "404" n parts:
-                  self.ip_list.append(parts[0])  #assumin ip is in first coloumn
-        expect FileNotFoundError:
-          print("Log file not found")
+            with open(self.log_file, 'r') as file:
+                for line in file:
+                    match = re.search(r'(\d+\.\d+\.\d+\.\d+).*? 404', line)
+                    if match:
+                        ip_addresses.append(match.group(1))
+        except FileNotFoundError:
+            return ["Log file not found."]
+        return [f"{count} {ip}" for ip, count in Counter(ip_addresses).most_common()]
 
-    def count_ips(self):
-          """Count Occurence of each unique IP"""
-          return collections.Counter(self.ipp_list)
-    def dsplay_results(self):
-          """Prnt sorted results"""
-          ip_counts = self.count_ip
+
           
       
